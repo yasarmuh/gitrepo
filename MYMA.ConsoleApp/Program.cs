@@ -36,7 +36,7 @@ namespace MYMA.ConsoleApp
 
             foreach (var item in result.Students)
             {
-                Console.WriteLine($"{item.FirstName} {item.MiddleName} {item.LastName} {item.DateofBirth.ToDateTime()} {item.AdmisstionDate.ToDateTime()}");
+                Console.WriteLine($"{item.FirstName} {item.MiddleName} {item.LastName} {item.DateofBirth.ToDateTime()} {item.AdmisstionDate.ToDateTime()} {item.Id}");
             }
             Console.ReadKey();
         }

@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace MYMA.DataStore.Client.Services
 {
-    public class GRPCDataStore : IDataStore<Student>
+    public class GRPCStudentDataStore : IDataStore<Student>
     {
         string serverAddress;
-        public GRPCDataStore() : this("https://10.0.2.2:5001")
+        public GRPCStudentDataStore() : this("https://localhost:5001")
         {
 
         }
-        public GRPCDataStore(string address)
+        public GRPCStudentDataStore(string address)
         {
             // var httpHandler = new HttpClientHandler
             // {
@@ -26,7 +26,7 @@ namespace MYMA.DataStore.Client.Services
             //     new GrpcChannelOptions { HttpHandler = httpHandler });
             // client = new StudentService.StudentServiceClient(channel);
 
-            
+
             serverAddress = address;
         }
 
@@ -69,6 +69,7 @@ namespace MYMA.DataStore.Client.Services
 
         public async Task<IEnumerable<Student>> GetItemsAsync()
         {
+            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             using var channel = GrpcChannel.ForAddress(serverAddress);
             var client = new StudentService.StudentServiceClient(channel);
 

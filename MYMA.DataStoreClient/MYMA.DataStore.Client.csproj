@@ -11,10 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Protos\Students.proto" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.14.0" />
     <PackageReference Include="Grpc.Core" Version="2.35.0" />
     <PackageReference Include="Grpc.Net.Client" Version="2.35.0" />
@@ -29,7 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\Students.proto" GrpcServices="Client" />
+    <Folder Include="Protos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\MYMA.GrpcDataStore.Service\Protos\Students.proto" GrpcServices="Client">
+      <Link>Protos\Students.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

@@ -19,7 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYMA.Android", "MYMA.Androi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MYMA.CommonBase", "MYMA.CommonBase\MYMA.CommonBase.csproj", "{72D03E19-C792-4B9C-A0D7-3A1B5B38B362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYMA.ConsoleApp", "MYMA.ConsoleApp\MYMA.ConsoleApp.csproj", "{34DDD06C-5404-48BD-B493-0203475D7E49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MYMA.ConsoleApp", "MYMA.ConsoleApp\MYMA.ConsoleApp.csproj", "{34DDD06C-5404-48BD-B493-0203475D7E49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYMA.BlazerApp.RehmanSchool", "MYMA.BlazerApp.RehmanSchool\MYMA.BlazerApp.RehmanSchool.csproj", "{4B1DAC82-3DAA-4E21-9421-073FADC4AD58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{34DDD06C-5404-48BD-B493-0203475D7E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34DDD06C-5404-48BD-B493-0203475D7E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34DDD06C-5404-48BD-B493-0203475D7E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B1DAC82-3DAA-4E21-9421-073FADC4AD58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B1DAC82-3DAA-4E21-9421-073FADC4AD58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B1DAC82-3DAA-4E21-9421-073FADC4AD58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B1DAC82-3DAA-4E21-9421-073FADC4AD58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

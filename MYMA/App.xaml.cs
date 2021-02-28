@@ -10,7 +10,7 @@ namespace MYMA
         {
             InitializeComponent();
 
-            DependencyService.Register<GRPCDataStore>();
+            DependencyService.Register<GRPCStudentDataStore>();
             MainPage = new AppShell();
         }
 

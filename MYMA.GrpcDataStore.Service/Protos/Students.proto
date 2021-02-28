@@ -27,6 +27,7 @@ message Student {
   google.protobuf.Timestamp dateofBirth = 5;
   google.protobuf.Timestamp admisstionDate = 6;
   string mobileNumber = 7;
+  string urduName=8;
 }
 
 message StudentId {
