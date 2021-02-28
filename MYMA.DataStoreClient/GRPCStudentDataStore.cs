@@ -69,7 +69,7 @@ namespace MYMA.DataStore.Client.Services
 
         public async Task<IEnumerable<Student>> GetItemsAsync()
         {
-            AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+            
             using var channel = GrpcChannel.ForAddress(serverAddress);
             var client = new StudentService.StudentServiceClient(channel);
 

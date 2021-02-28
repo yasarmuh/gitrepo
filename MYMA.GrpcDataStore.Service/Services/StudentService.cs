@@ -27,6 +27,7 @@ namespace MYMA.GrpcDataStore.Service
                 result.MiddleName = record.MiddleName;
                 result.Id = record.Id;
                 result.MobileNumber = record.MobileNumber;
+                result.UrduName = record.UrduName;
 
             }
             return Task.FromResult(result);
@@ -47,7 +48,8 @@ namespace MYMA.GrpcDataStore.Service
                         LastName = y.LastName,
                         MiddleName = y.MiddleName,
                         Id = y.Id,
-                        MobileNumber = y.MobileNumber
+                        MobileNumber = y.MobileNumber,
+                        UrduName=y.UrduName
                     }));
             }
             return Task.FromResult(result);
@@ -65,6 +67,7 @@ namespace MYMA.GrpcDataStore.Service
                     DateofBirth = request.DateofBirth.ToDateTime(),
                     AdmisstionDate = request.AdmisstionDate.ToDateTime(),
                     MobileNumber = request.MobileNumber,
+                    UrduName=request.UrduName,
                     Id=request.Id
                 });
                 dbContext.SaveChanges();
@@ -96,6 +99,7 @@ namespace MYMA.GrpcDataStore.Service
                     entitytoupdate.DateofBirth = request.DateofBirth.ToDateTime();
                     entitytoupdate.AdmisstionDate = request.AdmisstionDate.ToDateTime();
                     entitytoupdate.MobileNumber = request.MobileNumber;
+                    entitytoupdate.UrduName = request.UrduName;
                     dbContext.SaveChanges();
                 }
             }

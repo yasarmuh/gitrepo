@@ -1,28 +1,49 @@
 ﻿@page "/studentslist"
+@using MYMA.GrpcDataStore.Service;
 @inject MYMA.DataStore.Client.Services.GRPCStudentDataStore StudentDataStore
-<h1 class="page-item">Students</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Stundent Id</th>
-            <th>Name</th>
-            <th>نام</th>
-            <th>Date of Birth</th>
-            <th>Admisstion Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Students)
-        {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.FirstName @item.MiddleName @item.LastName</td>
-                <td>@item.UrduName</td>
-                <td>@item.DateofBirth</td>
-                <td>@item.AdmisstionDate</td>
-            </tr>
-        }
-    </tbody>
 
-</table>
+<h1 class="page-item">Students</h1>
+@if (Students == null)
+{
+    <p></p><em>Loading...</em>
+    <p />
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>               
+                <th>Stundent Id</th>
+                <th>Name</th>
+                <th>نام</th>
+                <th>Date of Birth</th>
+                <th>Admisstion Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Students)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.FirstName @item.MiddleName @item.LastName</td>
+                    <td>@item.UrduName</td>
+                    <td>@item.DateofBirth</td>
+                    <td>@item.AdmisstionDate</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code{
+    private IEnumerable<Student> Students;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Students = await StudentDataStore.GetItemsAsync();
+        base.OnInitializedAsync();
+    }
+
+}
+

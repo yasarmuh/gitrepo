@@ -11,6 +11,7 @@ namespace MYMA.ConsoleApp
     {
          static async Task Main(string[] args)
         {
+            try { 
             var httpHandler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback =
@@ -27,6 +28,7 @@ namespace MYMA.ConsoleApp
                     FirstName = "FirstName",
                     LastName = "LastName",
                     MiddleName = "MiddleName",
+                    //UrduName= "طالب علم",
                     Id = Guid.NewGuid().ToString(),
                     MobileNumber = "0300176"
                 });
@@ -36,9 +38,20 @@ namespace MYMA.ConsoleApp
 
             foreach (var item in result.Students)
             {
+                
+                //if(string.IsNullOrEmpty(item.UrduName))
+                //{
+                //    item.UrduName = "طالب علم";
+                //}
+                //await client.UpdateStudnetAsync(item);
                 Console.WriteLine($"{item.FirstName} {item.MiddleName} {item.LastName} {item.DateofBirth.ToDateTime()} {item.AdmisstionDate.ToDateTime()} {item.Id}");
             }
             Console.ReadKey();
+            }
+            catch(RpcException e)
+            {
+                var err=e.ToString();
+            }
         }
     }
 }
