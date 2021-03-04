@@ -8,7 +8,7 @@ namespace MYMA.ViewModels
 {
     public class BaseViewModel : ReactiveObject
     {
-        public IDataStore<Student> DataStore => DependencyService.Get<IDataStore<Student>>();
+        public IDataStore<Models.Student> DataStore => DependencyService.Get<IDataStore<Models.Student>>();
 
         [Reactive]
         public bool IsBusy { get; set; }

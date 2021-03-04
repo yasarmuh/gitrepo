@@ -1,5 +1,5 @@
 ﻿@page "/studentslist"
-@using MYMA.GrpcDataStore.Service;
+
 @inject MYMA.DataStore.Client.Services.GRPCStudentDataStore StudentDataStore
 
 <h1 class="page-item">Students</h1>
@@ -37,7 +37,7 @@ else
 }
 
 @code{
-    private IEnumerable<Student> Students;
+    private IEnumerable<Models.Student> Students;
 
     protected async override Task OnInitializedAsync()
     {

@@ -2,6 +2,7 @@ using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,21 +37,28 @@ namespace MYMA.GrpcDataStore.Service
         public override Task<StudentList> GetAllStudents(Empty request, ServerCallContext context)
         {
             var result = new StudentList();
-            using (MYMA.Students.DAL.StudentDbContext dbContext = new MYMA.Students.DAL.StudentDbContext())
+            try
             {
-                result.Students.AddRange(
-                    dbContext.Students.ToList()
-                    .Select(y => new Student()
-                    {
-                        AdmisstionDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(y.AdmisstionDate.ToUniversalTime()),
-                        DateofBirth = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(y.DateofBirth.ToUniversalTime()),
-                        FirstName = y.FirstName,
-                        LastName = y.LastName,
-                        MiddleName = y.MiddleName,
-                        Id = y.Id,
-                        MobileNumber = y.MobileNumber,
-                        UrduName=y.UrduName
-                    }));
+                using (MYMA.Students.DAL.StudentDbContext dbContext = new MYMA.Students.DAL.StudentDbContext())
+                {
+                    result.Students.AddRange(
+                        dbContext.Students.ToList()
+                        .Select(y => new Student()
+                        {
+                            AdmisstionDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(y.AdmisstionDate.ToUniversalTime()),
+                            DateofBirth = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(y.DateofBirth.ToUniversalTime()),
+                            FirstName = y.FirstName,
+                            LastName = y.LastName,
+                            MiddleName = y.MiddleName,
+                            Id = y.Id,
+                            MobileNumber = y.MobileNumber,
+                            UrduName = y.UrduName
+                        }));
+                }
+            }
+            catch(Exception e)
+            {
+                var err = e.ToString();
             }
             return Task.FromResult(result);
         }
@@ -70,7 +78,27 @@ namespace MYMA.GrpcDataStore.Service
                     UrduName=request.UrduName,
                     Id=request.Id
                 });
-                dbContext.SaveChanges();
+                try
+                {
+                    dbContext.SaveChanges();
+                }
+                catch (DbEntityValidationException er)
+                {
+                    foreach (var eve in er.EntityValidationErrors)
+                    {
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+
+                            var error = ve.PropertyName + ve.ErrorMessage;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    var err = e.ToString();
+                    throw;
+                }
+                
             }
             return Task.FromResult(request);
         }

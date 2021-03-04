@@ -37,11 +37,11 @@ namespace MYMA.ViewModels
 
         private async void OnSave()
         {
-            Student newItem = new Student()
+            Models.Student newItem = new Models.Student()
             {
                 Id = Guid.NewGuid().ToString(),
-                AdmisstionDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.UtcNow),
-                DateofBirth = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.UtcNow - new TimeSpan(1500, 0, 0, 0, 0)),
+                AdmisstionDate = DateTime.UtcNow,
+                DateofBirth = (DateTime.UtcNow - new TimeSpan(1500, 0, 0, 0, 0)),
                 FirstName = "First",
                 MiddleName = " ",
                 LastName = "Last"

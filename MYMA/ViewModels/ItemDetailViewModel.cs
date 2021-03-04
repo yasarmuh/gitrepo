@@ -39,9 +39,9 @@ namespace MYMA.ViewModels
             try
             {
                 var student = await DataStore.GetItemAsync(studentId);
-                Id = student.DateofBirth.ToDateTime().ToString("d");
+                 //= student.DateofBirth.ToDateTime().ToString("d");
                 Text = student.FirstName + student.MiddleName + student.LastName;
-                Description = student.AdmisstionDate.ToDateTime().ToString("d");
+                //Description = student.AdmisstionDate.ToDateTime().ToString("d");
             }
             catch (Exception)
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MYMA.DataStore.Client.Services
 {
-    public class GRPCStudentDataStore : IDataStore<Student>
+    public class GRPCStudentDataStore : IDataStore<Models.Student>
     {
         string serverAddress;
         public GRPCStudentDataStore() : this("https://localhost:5001")
@@ -30,21 +30,42 @@ namespace MYMA.DataStore.Client.Services
             serverAddress = address;
         }
 
-        public async Task<bool> AddItemAsync(Student item)
+        public async Task<bool> AddItemAsync(Models.Student item)
         {
             using var channel = GrpcChannel.ForAddress(serverAddress);
             var client = new StudentService.StudentServiceClient(channel);
-
-            await client.InsertStudentAsync(item);
+            Student toinsert = new Student()
+            {
+                AdmisstionDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(item.AdmisstionDate),
+                DateofBirth = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(item.DateofBirth),
+                Id = item.Id,
+                FirstName = item.FirstName,
+                LastName = item.LastName,
+                MiddleName = item.MiddleName,
+                MobileNumber = item.MobileNumber,
+                UrduName = item.UrduName
+            };
+            await client.InsertStudentAsync(toinsert);
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Student item)
+        public async Task<bool> UpdateItemAsync(Models.Student item)
         {
             using var channel = GrpcChannel.ForAddress(serverAddress);
             var client = new StudentService.StudentServiceClient(channel);
+            Student toupdate = new Student()
+            {
+                AdmisstionDate = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(item.AdmisstionDate),
+                DateofBirth = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(item.DateofBirth),
+                Id = item.Id,
+                FirstName = item.FirstName,
+                LastName = item.LastName,
+                MiddleName = item.MiddleName,
+                MobileNumber = item.MobileNumber,
+                UrduName = item.UrduName
+            };
 
-            await client.UpdateStudnetAsync(item);
+            await client.UpdateStudnetAsync(toupdate);
 
             return await Task.FromResult(true);
         }
@@ -58,23 +79,50 @@ namespace MYMA.DataStore.Client.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Student> GetItemAsync(string id)
+        public async Task<Models.Student> GetItemAsync(string id)
         {
             using var channel = GrpcChannel.ForAddress(serverAddress);
             var client = new StudentService.StudentServiceClient(channel);
 
-            var result = await client.GetStudentAsync(new StudentId { Id = id });
-            return await Task.FromResult(result);
+            var item = await client.GetStudentAsync(new StudentId { Id = id });
+            Models.Student foundstudent = new Models.Student()
+            {
+                AdmisstionDate = item.AdmisstionDate.ToDateTime(),
+                DateofBirth = item.DateofBirth.ToDateTime(),
+                Id = item.Id,
+                FirstName = item.FirstName,
+                LastName = item.LastName,
+                MiddleName = item.MiddleName,
+                MobileNumber = item.MobileNumber,
+                UrduName = item.UrduName
+            };
+            return await Task.FromResult(foundstudent);
         }
 
-        public async Task<IEnumerable<Student>> GetItemsAsync()
+        public async Task<IEnumerable<MYMA.Models.Student>> GetItemsAsync()
         {
-            
+            List<MYMA.Models.Student> studentslist = new List<MYMA.Models.Student>();
+
             using var channel = GrpcChannel.ForAddress(serverAddress);
             var client = new StudentService.StudentServiceClient(channel);
 
             var result = await client.GetAllStudentsAsync(new Empty());
-            return await Task.FromResult(result.Students);
+            foreach (var item in result.Students)
+            {
+                studentslist.Add(new Models.Student
+                {
+                    AdmisstionDate = item.AdmisstionDate.ToDateTime(),
+                    DateofBirth = item.DateofBirth.ToDateTime(),
+                    Id = item.Id,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    MiddleName = item.MiddleName,
+                    MobileNumber = item.MobileNumber,
+                    UrduName = item.UrduName
+                });
+            }
+            return studentslist;
         }
+
     }
 }

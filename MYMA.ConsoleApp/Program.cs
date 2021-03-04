@@ -28,7 +28,7 @@ namespace MYMA.ConsoleApp
                     FirstName = "FirstName",
                     LastName = "LastName",
                     MiddleName = "MiddleName",
-                    //UrduName= "طالب علم",
+                    UrduName= "طالب علم",
                     Id = Guid.NewGuid().ToString(),
                     MobileNumber = "0300176"
                 });

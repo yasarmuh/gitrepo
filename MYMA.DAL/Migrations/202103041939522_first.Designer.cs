@@ -7,13 +7,13 @@ namespace MYMA.Students.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class classid : IMigrationMetadata
+    public sealed partial class first : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(classid));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(first));
         
         string IMigrationMetadata.Id
         {
-            get { return "202012301143456_classid"; }
+            get { return "202103041939522_first"; }
         }
         
         string IMigrationMetadata.Source

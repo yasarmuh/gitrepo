@@ -12,12 +12,14 @@
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        FirstName = c.String(),
-                        MiddleName = c.String(),
-                        LastName = c.String(),
+                        FirstName = c.String(nullable: false),
+                        MiddleName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                        UrduName = c.String(nullable: false),
                         DateofBirth = c.DateTime(nullable: false),
                         AdmisstionDate = c.DateTime(nullable: false),
-                        MobileNumber = c.String(),
+                        MobileNumber = c.String(nullable: false),
+                        CurrentClassId = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

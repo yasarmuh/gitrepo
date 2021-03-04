@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MYMA.CommonBase", "MYMA.Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MYMA.ConsoleApp", "MYMA.ConsoleApp\MYMA.ConsoleApp.csproj", "{34DDD06C-5404-48BD-B493-0203475D7E49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MYMA.BlazerApp.RehmanSchool", "MYMA.BlazerApp.RehmanSchool\MYMA.BlazerApp.RehmanSchool.csproj", "{4B1DAC82-3DAA-4E21-9421-073FADC4AD58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MYMA.BlazerApp.RehmanSchool", "MYMA.BlazerApp.RehmanSchool\MYMA.BlazerApp.RehmanSchool.csproj", "{4B1DAC82-3DAA-4E21-9421-073FADC4AD58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

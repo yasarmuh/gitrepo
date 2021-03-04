@@ -13,25 +13,25 @@ namespace MYMA.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Student _selectedStudent;
+        private Models.Student _selectedStudent;
 
-        public ObservableCollection<Student> Students { get; }
+        public ObservableCollection<Models.Student> Students { get; }
         public ICommand LoadItemsCommand { get; }
         public ICommand AddItemCommand { get; }
-        public ReactiveCommand<Student, Unit> ItemTapped { get; }
+        public ReactiveCommand<Models.Student, Unit> ItemTapped { get; }
 
         public ItemsViewModel()
         {
             Title = "Browse";
-            Students = new ObservableCollection<Student>();
+            Students = new ObservableCollection<Models.Student>();
             LoadItemsCommand = ReactiveCommand.Create(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = ReactiveCommand.CreateFromTask<Student>(OnStudentSelected());
+            ItemTapped = ReactiveCommand.CreateFromTask<Models.Student>(OnStudentSelected());
 
             AddItemCommand = ReactiveCommand.Create(async () => await OnAddStudent());
         }
 
-        private Func<Student, Task> OnStudentSelected()
+        private Func<Models.Student, Task> OnStudentSelected()
         {
             return async (student) =>
             {
@@ -71,7 +71,7 @@ namespace MYMA.ViewModels
             IsBusy = true;
             SelectedStudent = null;
         }
-        public Student SelectedStudent
+        public Models.Student SelectedStudent
         {
             get => _selectedStudent;
             set

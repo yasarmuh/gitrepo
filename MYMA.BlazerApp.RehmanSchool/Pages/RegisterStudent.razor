@@ -1,0 +1,23 @@
+﻿@page "/registerStudent"
+
+@inject MYMA.DataStore.Client.Services.GRPCStudentDataStore StudentDataStore
+
+<h3>Register Student</h3>
+<EditForm Model="@newStudent" OnSubmit="@InsertStudent">
+    
+
+    <InputText DisplayName="First Name" @bind-Value="newStudent.FirstName" />
+    <InputText DisplayName="Middle Name" @bind-Value="newStudent.MiddleName" />
+    <InputText DisplayName="Last Name" @bind-Value="newStudent.LastName" />
+    <InputText DisplayName="Urdu Name" @bind-Value="newStudent.UrduName" />
+    <InputDate DisplayName="Date of Birth" @bind-Value="newStudent.DateofBirth" />
+    <InputDate DisplayName="Admission Date" @bind-Value="newStudent.AdmisstionDate" />
+    <button type="submit" class="btn btn-primary">Register</button>
+</EditForm>
+@code {
+    Models.Student newStudent;
+    private async Task InsertStudent()
+    {
+        await StudentDataStore.AddItemAsync(newStudent);
+    }
+}
